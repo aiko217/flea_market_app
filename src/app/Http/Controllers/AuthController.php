@@ -18,7 +18,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
         Auth::login($user);
-        return redirect('create');
+        return redirect('/profile');
     }
 
     public function loginUser(LoginRequest $request)
@@ -29,5 +29,14 @@ class AuthController extends Controller
             return redirect('index');
         }
 
+    }
+
+    public function destroy(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }

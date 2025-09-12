@@ -1,0 +1,78 @@
+@media (min-width: 1400px) and (max-width: 1540px) {
+.header {
+    
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.item_search__form {
+    width: 200px;
+    margin: 0 20px;
+    display: flex;
+}
+
+.item_search-input {
+    max-width: 600px;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #fffefe;
+    border-radius: 4px 0 0 4px;
+}
+
+
+.header__nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.btn-sell {
+    background: #fff;
+    color: #050505;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-sell:hover {
+    background: #e84118;
+}
+
+.logout-form {
+    display: inline;
+}
+
+.btn-logout {
+    background: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font: inherit;
+    text-decoration: underline;
+    padding: 0;
+}
+
+.btn-logout:hover {
+    color: #e84118;
+}
+.header__form--logout {
+    font-size: 16px;
+    background-color: #F7F7F7;
+    border: 1px solid #CDCDCD;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 40px;
+    position: relative;
+}
+
+}

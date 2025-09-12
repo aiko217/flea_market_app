@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="{{asset('css/sanitize.css')}}">
     <link rel="stylesheet" href="{{asset('css/login_register.css')}}">
     @yield('css')
+    
 </head>
 <body>
-    <header class="header">
+<header class="header">
     <div class="header__inner">
-    <a href="{{ url('/') }}" class="logo-link">
-    <img src="{{ asset('images/logo.svg') }}" alt="アプリロゴ" class="logo">
+    <img src="/images/logo.svg" alt="アプリロゴ">
     @yield('content')
 </body>
 </html>

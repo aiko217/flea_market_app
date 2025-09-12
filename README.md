@@ -29,3 +29,22 @@ php artisan key:generate
 ``` bash
 php artisan migrate
 ```
+
+7. シーディングの実行
+``` bash
+php artisan db:seed
+```
+8. シンボリックリンク作成
+``` bash
+php artisan storage:link
+```
+
+## 使用技術(実行環境)
+- PHP8.1.33
+- Laravel8.83.8
+- MySQL8.0
+
+- ## URL
+- 開発環境：http://localhost/
+- phpMyAdmin:：http://localhost:8080/
+
