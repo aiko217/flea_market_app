@@ -11,54 +11,43 @@
 <body>
     <header class="header">
     <div class="header__inner">
-    <img src="images/logo.svg" alt="アプリロゴ">
+    <img src="{{ asset('storage/images/logo.svg') }}" alt="アプリロゴ" class="img-content" />
         <form action="/items/search" class="item_search__form" method="get">
-        <input type="text" class="item_search-input" name="keyword" placeholder="何をお探しですか?" value="{{ old('keyword', request('keyword')) }}">
+        <input type="text" class="item_search-input" name="keyword" placeholder="なにをお探しですか?" value="{{ old('keyword', request('keyword')) }}">
+        <input type="hidden" name="viewType" value="{{ $viewType ?? 'recommend' }}">
         </form>
-        @auth
         <nav class="header__nav">
           <ul class="header__list">
-            <li class="header__list-item">
+          @auth
+            <li>
             <form action="/logout" class="header__form" method="post">
             @csrf
-            <button class="header__form--logout" type="submit">ログアウト</button>
+            <button type="submit" class="logout__button-submit">ログアウト</button>
             </form>
             </li>
-            <li class="header__list-item">
-            <div class="mypage__link">
-            <a class="mypage__button-submit" href="/profile">マイページ</a>
-            </div>
+            <li>
+            <a class="mypage__button-submit" href="/mypage">マイページ</a>
             </li>
-            <li class="header__list-item">
-            <div class="sell__link">
+            <li>
             <a class="sell__button-submit" href="/sell">出品</a>
-            </div>
             </li>
-          </ul>
-        </nav>
             @else
-        <nav class="header__nav">
-          <ul class="header__list">
-            <li class="header__list-item">
-            <div class="sell__link">
+            <li>
             <a class="login__button-submit" href="/login">ログイン</a>
-            </div>
             </li>
-            <li class="header__list-item">
-            <div class="mypage__link">
-            <a class="mypage__button-submit" href="/profile">マイページ</a>
-            </div>
+            <li>
+            <a class="mypage__button-submit" href="/mypage">マイページ</a>
             </li>
-            <li class="header__list-item">
-            <div class="sell__link">
+            <li>
             <a class="sell__button-submit" href="/sell">出品</a>
-            </div>
             </li>
-          </ul>
-        </nav>
-            @endauth
+         @endauth
+         </ul>
         </nav>
     </div>
+    </header>
     @yield('content')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @yield('scripts')
 </body>
 </html>

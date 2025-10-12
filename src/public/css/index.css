@@ -1,0 +1,42 @@
+.toppage-list {
+    width: 1512px;
+    height: 47PX;
+    margin-top: 127px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.tab__button {
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    color: #333; 
+    text-decoration: none;
+}
+
+.tab__button.active {
+    color: red;
+}
+.products-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.item-card {
+    background-color: #fff;
+    border-radius: 2px;
+    padding: 10px;
+    text-align: left;
+}
+
+.item-card__img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}

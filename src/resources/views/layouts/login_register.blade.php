@@ -12,7 +12,7 @@
 <body>
 <header class="header">
     <div class="header__inner">
-    <img src="/images/logo.svg" alt="アプリロゴ">
+    <img src="{{ asset('storage/images/logo.svg') }}" alt="アプリロゴ" class="img-content" />
     @yield('content')
 </body>
 </html>

@@ -1,0 +1,144 @@
+.sell-form__content {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+}
+
+.sell-form__title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.image-upload-box {
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    padding: 40px;
+    text-align: center;
+}
+
+.image-upload-label {
+    color: #FF5555;
+    border: 2px solid #FF5555;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+.item-detail {
+    color: #5F5F5F;
+    border-bottom: 1px solid #5F5F5F;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-list input[type="checkbox"] {
+    display: none;
+}
+
+.category-label {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid #FF5555;
+    border-radius: 20px;
+    color: #FF5555;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.category-list input[type="checkbox"]:checked+.category-label {
+    background-color: #FF5555;
+    color: #fff;
+}
+
+.category-tag {
+    padding: 6px 12px;
+    border: 1px solid #FF5555;
+    border-radius: 20px;
+    background: #fff;
+    color: #FF5555;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.category-tag:hover {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+.select-box,
+.input-box,
+.textarea-box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.price-input {
+    position: relative;
+}
+
+.price-input input {
+    padding-left: 20px;
+}
+
+.price-input::before {
+    content: '￥';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+.textarea-box {
+    height: 100px;
+    resize: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background: #FF5555;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #ff4c4c;
+}
+
+#itemPreview {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
