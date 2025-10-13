@@ -16,7 +16,14 @@
   <div class="profile-edit__wrapper">
     <div class="profile-edit__avatar">
         <img id="avatarPreview"
-             src="{{ old('image') ? asset('storage/' . old('image')) : asset('images/avatar-placeholder.png') }}"
+             src="@if (old('image'))
+              {{ asset('storage/' . old('image')) }}
+              @elseif (!empty($profile) && $profile->image)
+              {{ asset('storage/' . $profile->image) }}
+              @else
+              {{ asset('images/avatar-placeholder.png') }}
+               @endif
+               "
              alt="">
     </div>
     <div class="profile-edit__controls">

@@ -22,6 +22,10 @@ class AuthController extends Controller
         return redirect('/edit');
     }
 
+    public function loginForm()
+    {
+        return view('auth.login');
+    }
     public function loginUser(LoginRequest $request)
     {
         $credentials=$request->only('email', 'password');

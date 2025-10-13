@@ -70,7 +70,8 @@
     white-space: nowrap;
 }
 
-.category-list input[type="checkbox"]:checked+.category-label {
+.category-list input[type="checkbox"]:checked+
+.category-label {
     background-color: #FF5555;
     color: #fff;
 }

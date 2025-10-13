@@ -66,7 +66,7 @@ class ItemController extends Controller
             $query->where('name', 'like', "%{$keyword}%");
         }
 
-        $items = $query->inRandomOrder()->take(8)->get();
+        $items = $query->inRandomOrder()->get();
     }
 
     return view('index', [
@@ -75,33 +75,7 @@ class ItemController extends Controller
         'keyword' => $keyword
     ]);
 }
-
-    public function mylist(Request $request)
-    {
-        $keyword = $request->input('keyword');
-
-        if (!Auth::check()) {
-            return view('index', [
-                'items' => collect(),
-                'viewType' => 'mylist',
-                'keyword' => $keyword
-            ]);
-        }
-
-        $items = Auth::user()->favoriteItems()->with('purchase')->get();
         
-        if ($keyword) {
-            $items = $items->filter(function ($item) use ($keyword) {
-                return mb_stripos($item->name, $keyword) !== false;
-            });
-        }
-        return view('index', [
-            'items' => $items,
-             'viewType' => 'mylist',
-            'keyword' => $keyword
-        ]);
-    }
-
     public function detail($item_id)
     {
         $item = Item::withCount(['favorites', 'comments'])
@@ -136,11 +110,11 @@ class ItemController extends Controller
         ]);
         $favorited = true;
     }
-        $favorites_count = $item->favorites()->count();
+        
 
         return response()->json([
             'favorited' => $favorited,
-            'favorites_count' => $favorites_count,
+            'favorites_count' => $item->favorites()->count(),
         ]);
     }
     public function comment(CommentRequest $request, $item_id)

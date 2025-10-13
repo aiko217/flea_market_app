@@ -41,10 +41,13 @@ php artisan storage:link
 
 ## 使用技術(実行環境)
 - PHP8.1.33
-- Laravel8.83.8
+- Laravel 8.83.8
 - MySQL8.0
 
 - ## URL
 - 開発環境：http://localhost/
 - phpMyAdmin:：http://localhost:8080/
 
+## ER 図
+
+![ER図](drawio.png)

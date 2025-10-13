@@ -36,7 +36,7 @@
             <div class="categories">
              <h4>カテゴリ-</h4>
             @foreach($item->categories as $category)
-                <span>{{ $category->category }}</span>
+                <span class="category-tag">{{ $category->category }}</span>
             @endforeach  
             </div>
             <div class="condition">
@@ -93,11 +93,11 @@
             btn.find('.favorite-icon').toggleClass('favorited', res.favorited);
             btn.find('.favorite-count').text(res.favorites_count);
         },
-        error: function(err){
-            if(err.status === 401){
-                window.location.href = err.responseJSON.login_url;
+        error: function(xhr){
+            if (xhr.status === 401 && xhr.responseJSON && xhr.responseJSON.login_url) {
+                window.location.href = xhr.responseJSON.login_url;
             } else {
-                console.error(err);
+                console.error('Error:', xhr);
             }
         }
     });
