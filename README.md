@@ -49,7 +49,7 @@ php artisan storage:link
    ```bash
    cp .env .env.testing
    ```
-   ```
+   ``` bash
 2. php artisan key:generate --env=testing
 3. php artisan config:clear
 4. php artisan migrate --env=testing
@@ -57,10 +57,10 @@ php artisan storage:link
 6. vendor/bin/phpunit tests/Feature/HelloTest.php
    ```
 ### 実行結果
-   ```
+   ``` bash
   PHPUnit 9.5.20 #StandWithUkraine
 
-  .                                                                   1 / 1 (100%)
+  .                                                         1 / 1 (100%)
 
   Time: 00:00.573, Memory: 26.00 MB
 
