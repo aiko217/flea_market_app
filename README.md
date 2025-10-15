@@ -50,11 +50,11 @@ php artisan storage:link
    cp .env .env.testing
    ```
    ``` bash
-2. php artisan key:generate --env=testing
-3. php artisan config:clear
-4. php artisan migrate --env=testing
-5. php artisan make:test HelloTest
-6. vendor/bin/phpunit tests/Feature/HelloTest.php
+   2. php artisan key:generate --env=testing
+   3. php artisan config:clear
+   4. php artisan migrate --env=testing
+   5. php artisan make:test HelloTest
+   6. vendor/bin/phpunit tests/Feature/HelloTest.php
    ```
 ### 実行結果
    ``` bash
