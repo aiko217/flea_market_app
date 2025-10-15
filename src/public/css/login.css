@@ -1,3 +1,5 @@
+
+@media (min-width: 1400px) and (max-width: 1540px) {
 .login-form__content {
     margin: 0 auto;
     padding: 30px 15px;
@@ -69,4 +71,5 @@
 .register__button-submit {
     color: #0073CC;
     text-decoration: none;
+}
 }

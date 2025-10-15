@@ -31,6 +31,9 @@ class ProfileController extends Controller
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('profiles', 'public');
         }
+        else if ($profile->exists) {
+            $data['image'] = $profile->image;
+        }
 
         $profile->fill($data)->save();
 

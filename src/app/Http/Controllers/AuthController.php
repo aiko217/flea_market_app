@@ -19,7 +19,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
         Auth::login($user);
-        return redirect('/edit');
+        return redirect('/mypage/profile');
     }
 
     public function loginForm()
@@ -33,7 +33,9 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return redirect('/');
         }
-
+        return back()->withErrors([
+        'login' => 'メールアドレスまたはパスワードが正しくありません',
+        ])->onlyInput('email');
     }
 
     public function destroy(Request $request)

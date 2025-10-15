@@ -1,13 +1,14 @@
-
+@media (min-width: 1400px) and (max-width: 1540px) {
 .product-detail {
     display: flex;
-    max-width: 1000px;
+    max-width: 1380px;
     margin: 40px auto;
-    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .left-content {
-    flex: 1;
+    width: 690px;
 }
 
 .img-content {
@@ -20,7 +21,7 @@
 }
 
 .right-content {
-    flex: 2;
+    width: 690px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -68,6 +69,11 @@
     filter: invert(29%) sepia(93%) saturate(7495%) hue-rotate(356deg) brightness(92%) contrast(112%);
 }
 
+.comments {
+    font-size: 36px;
+    font-weight: bold;
+}
+
 .comment-count {
     display: flex;
     align-items: center;
@@ -79,6 +85,11 @@
     height: 20px;
 }
 
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
 
 .submit-purchase {
     display: inline-block;
@@ -182,4 +193,5 @@
 
 .detail-form__button-comment:hover {
     background-color: #c0392b;
+}
 }

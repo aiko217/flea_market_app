@@ -38,7 +38,34 @@ php artisan db:seed
 ``` bash
 php artisan storage:link
 ```
+## テスト　（PHPUnit）
 
+###　概要
+このプロジェクトでは Laravel 標準の PHPUnit を使用してテストを実施しています。
+テスト用のデータベースや環境設定を `.env.testing` に定義し、実行時には `--env=testing` を指定します。
+
+### テスト環境のセットアップ
+1. `.env` をコピーして `.env.testing` を作成します。
+   ```bash
+   cp .env .env.testing
+   ```
+   ```
+2. php artisan key:generate --env=testing
+3. php artisan config:clear
+4. php artisan migrate --env=testing
+5. php artisan make:test HelloTest
+6. vendor/bin/phpunit tests/Feature/HelloTest.php
+   ```
+### 実行結果
+   ```
+  PHPUnit 9.5.20 #StandWithUkraine
+
+  .                                                                   1 / 1 (100%)
+
+  Time: 00:00.573, Memory: 26.00 MB
+
+  OK (1 test, 1 assertion)
+   ```
 ## 使用技術(実行環境)
 - PHP8.1.33
 - Laravel 8.83.8

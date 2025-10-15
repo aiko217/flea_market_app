@@ -1,8 +1,5 @@
 @media (min-width: 1400px) and (max-width: 1540px) {
-
     body {
-        width: 100vw;
-        height: 100vh;
         margin: 0;
         padding: 0;
     }
@@ -12,7 +9,12 @@
         width: 1515px;
         height: 60PX;
         align-items: center;
+        justify-content: flex-start;
+        padding-left: 25px;
+    }
 
+    .header__inner {
+        align-items: center;
     }
 
     .img-content {
@@ -20,5 +22,6 @@
         height: 36px;
         object-fit: contain;
         display: block;
+        align-items: center;
     }
 }

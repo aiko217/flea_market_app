@@ -1,3 +1,5 @@
+
+@media (min-width: 1400px) and (max-width: 1540px) {
 .toppage-list {
     width: 1512px;
     height: 47PX;
@@ -39,4 +41,5 @@
     height: 200px;
     object-fit: cover;
     border-radius: 5px;
+}
 }

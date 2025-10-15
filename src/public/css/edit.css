@@ -1,3 +1,5 @@
+
+@media (min-width: 1400px) and (max-width: 1540px) {
 .profile-form__content {
     margin: 0 auto;
     padding: 30px 15px;
@@ -107,4 +109,5 @@
     background: #FF5555;
     color: #fff;
     cursor: pointer;
+}
 }

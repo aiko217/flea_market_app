@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="product-comments">
-            <h3>コメント</h3><span class="comments-count">({{ $item->comments->count() }})</span>
+            <p class="comments">コメント</p><span class="comments-count">({{ $item->comments->count() }})</span>
             <ul>
                 @foreach($item->comments()->latest()->get() as $comment)
                 <li class="comment-list">
@@ -67,7 +67,7 @@
         @csrf
         <textarea name="comment" class="detail-form__textarea"></textarea>
         @error('comment')
-            <p class="text-red-500">{{ $message }}</p>
+        <div class="form__error">{{ $message }}</div>
        @enderror
        <button  class="detail-form__button-comment"type="submit">コメントを送信する</button>
         </form>
