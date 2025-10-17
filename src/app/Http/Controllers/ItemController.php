@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\CommentRequest;
 use App\Models\Item;
-use App\Models\Favorite;
-use App\Models\User;
+//use App\Models\Favorite;
+//use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,41 +39,39 @@ class ItemController extends Controller
     }
 
     public function index(Request $request)
-{
-    $keyword = $request->input('keyword');
-    $viewType = $request->input('viewType', 'recommend');
-
-    $items = collect(); 
-
-    if ($viewType === 'mylist') {
-        if (Auth::check()) {
-            $query = Auth::user()->favoriteItems()
+    {
+        $keyword = $request->input('keyword');
+        $viewType = $request->input('viewType', 'recommend');
+    
+        if ($viewType === 'mylist') {
+            if (Auth::check()) {
+                $items = Auth::user()->favoriteItems()
                 ->with('purchase')
-                ->where('items.user_id', '!=', Auth::id());
-
-            if ($keyword) {
-                $query->where('items.name', 'like', "%{$keyword}%");
-            }
-
-            $items = $query->get();
-        }
-    } else { 
-        $query = Item::query();
-        if (Auth::check()) {
-            $query->where('user_id', '!=', Auth::id());
-        }
-        if ($keyword) {
-            $query->where('name', 'like', "%{$keyword}%");
-        }
-
-        $items = $query->inRandomOrder()->get();
+                ->where('items.user_id', '!=', Auth::id())
+                ->when($keyword && $keyword !== '', function($query) use ($keyword) {
+                    $query->where('items.name', 'like', "%{$keyword}%");
+                })
+                ->get();
+            } else {
+                $items = collect();
+        }  
     }
-
-    return view('index', [
-        'items' => $items,
-        'viewType' => $viewType,
-        'keyword' => $keyword
-    ]);
+    else {
+            $items = Item::when(Auth::check(), function($query) {
+                    $query->where('user_id', '!=', Auth::id());
+                })
+                ->when($keyword && $keyword !== '', function($query) use ($keyword) {
+                    $query->where('name', 'like', "%{$keyword}%");
+                })
+                ->inRandomOrder()
+                ->get();
+        }
+    
+        return view('index', [
+            'items' => $items,
+            'viewType' => $viewType,
+            'keyword' => $keyword
+        ]);
 }
         
     public function detail($item_id)

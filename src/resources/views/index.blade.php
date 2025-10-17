@@ -8,9 +8,13 @@
 
 <form class="form" action="/" method="get">
 <div class="toppage-list">
+    @php
+    $keywordParam = request('keyword') ?: null;
+    @endphp
+    
     <a class="tab__button {{ $viewType === 'recommend'
-     ? 'active' : '' }}" href="{{ url('/?viewType=recommend&keyword=' . request('keyword')) }}">おすすめ</a>
-    <a class="tab__button {{ $viewType === 'mylist' ? 'active' : '' }}" href="{{ url('/?viewType=mylist&keyword=' . request('keyword')) }}">マイリスト</a>
+     ? 'active' : '' }}" href="{{ url('/?viewType=recommend&keyword=' . $keywordParam) }}">おすすめ</a>
+    <a class="tab__button {{ $viewType === 'mylist' ? 'active' : '' }}" href="{{ url('/?viewType=mylist&keyword=' . $keywordParam) }}">マイリスト</a>
 </div>
 <div class="products-row">
         @forelse($items as $item)

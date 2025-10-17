@@ -7,7 +7,6 @@ use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
