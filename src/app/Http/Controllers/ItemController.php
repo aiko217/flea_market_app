@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\CommentRequest;
 use App\Models\Item;
-//use App\Models\Favorite;
-//use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 

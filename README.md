@@ -66,6 +66,12 @@ php artisan storage:link
 
   OK (1 test, 1 assertion)
    ```
+
+## user のログイン用初期データ
+
+- メールアドレス: user@gmail.com
+- パスワード: user1234
+
 ## 使用技術(実行環境)
 - PHP8.1.33
 - Laravel 8.83.8

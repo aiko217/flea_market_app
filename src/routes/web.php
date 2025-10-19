@@ -20,13 +20,13 @@ use App\Http\Controllers\PurchaseController;
 Route::post('/register', [AuthController::class, 'store']);
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'loginUser']);
-Route::post('/logout', [AuthController::class, 'destroy']);
 Route::get('items/search', [ItemController::class, 'search']);
 Route::get('/', [ItemController::class, 'index']);
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 Route::post('/favorite/{item_id}', [ItemController::class, 'favorite']);
 
 Route::middleware('auth')->group(function() {
+    Route::post('/logout', [AuthController::class, 'destroy']);
     Route::get('/mypage/profile', [ProfileController::class, 'edit']);
     Route::put('/mypage/profile', [ProfileController::class, 'update']);
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'create']);
