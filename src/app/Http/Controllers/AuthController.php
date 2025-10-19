@@ -18,12 +18,11 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        //10/19
+        
         $user->sendEmailVerificationNotification();
 
         Auth::login($user);
         return redirect()->route('verification.notice');
-        //return redirect('/mypage/profile');
     }
 
     public function loginForm()
@@ -36,7 +35,6 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            //10/19
             if(!Auth::user()->hasVerifiedEmail()) {
                 Auth::logout();
                 return redirect()->route('verification.notice')->with('warning', 'メール認証を完了してください ');
