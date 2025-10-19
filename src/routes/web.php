@@ -5,7 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
-
+//10/19
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,18 @@ use App\Http\Controllers\PurchaseController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//メール認証１０/19
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/mypage/profile');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', '認証メールを再送しました。');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::post('/register', [AuthController::class, 'store']);
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
