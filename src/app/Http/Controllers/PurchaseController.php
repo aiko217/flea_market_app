@@ -51,10 +51,11 @@ class PurchaseController extends Controller
 
         Purchase::create([
             'item_id' => $item_id,
-            'user_id' => $user->id,
+            'buyer_id' => Auth::id(),
             'sending_postcode' => $address['postal_code'],
             'sending_address' => $address['address'],
             'sending_building' => $address['building'],
+            'status' => 'trading',
         ]);
         session()->forget('temp_address');
 

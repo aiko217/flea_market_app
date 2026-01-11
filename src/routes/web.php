@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ChatController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 /*
@@ -50,6 +51,10 @@ Route::middleware('auth')->group(function() {
     Route::get('/sell' , [ItemController::class, 'create']);
     Route::post('/sell' , [ItemController::class, 'store']);
     Route::get('/mypage' , [ProfileController::class, 'profile']);
+    Route::get('/chat/{purchase}', [ChatController::class, 'show'])->name('chat.show');
+    Route::post('/chat/{purchase}', [ChatController::class, 'store'])->name('chat.store');
+    Route::put('/chat/message/{message}', [ChatController::class, 'update'])->name('chat.update');
+    Route::delete('/chat/message/{message}', [ChatController::class, 'destroy'])->name('chat.destroy');
 
 });
 

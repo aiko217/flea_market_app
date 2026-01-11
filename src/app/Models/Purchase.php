@@ -10,19 +10,24 @@ class Purchase extends Model
     use HasFactory;
     protected $fillable = [
         'item_id',
-        'user_id',
+        'buyer_id',
         'sending_postcode',
         'sending_address',
         'sending_building',
+        'status',
     ];
 
     public function item()
     {
         return $this->belongsTo(Item::class);
     }
-    public function user()
+    public function buyer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'buyer_id');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

@@ -16,10 +16,11 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('buyer_id')->constrained('users')->cascadeOnDelete();
             $table->string('sending_postcode', 255); 
             $table->string('sending_address', 255); 
             $table->string('sending_building', 255)->nullable(); 
+            $table->string('status')->default('trading');
             $table->timestamps();
         });
     }
