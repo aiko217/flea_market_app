@@ -31,8 +31,22 @@ class Purchase extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function review() 
+    public function reviews()
     {
-        return $this->hasOne(Review::class);
+        return $this->hasMany(Review::class);
     }
+
+    /*public function buyerReview()
+    {
+        return $this->reviews(Review::class)
+        ->whereColumn('reviewer_id', 'buyer_id');
+    }
+
+    public function sellerReview()
+    {
+        return $this->hasOne(Review::class)
+            ->whereHas('reviewer', function ($q) {
+                $q->whereColumn('users.id', 'items.user_id');
+            });
+    }*/
 }

@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function() {
     Route::put('/chat/message/{message}', [ChatController::class, 'update'])->name('chat.update');
     Route::delete('/chat/message/{message}', [ChatController::class, 'destroy'])->name('chat.destroy');
     Route::post('/purchase/{purchase}/review', [ReviewController::class, 'store'])->name('review.store');
-
+    Route::post('/purchase/{purchase}/complete', [ChatController::class, 'complete'])->name('chat.complete');
 });
 
 

@@ -9,6 +9,7 @@ use App\Models\Purchase;
 use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\AddressRequest;
 
+
 class PurchaseController extends Controller
 {
     //

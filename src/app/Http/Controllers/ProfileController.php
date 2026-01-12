@@ -68,8 +68,16 @@ class ProfileController extends Controller
 
         } elseif ($viewType === 'trading') {
 
-            $items = Item::WhereHas('purchase', function ($query) {
-                $query->where('status', 'trading');
+            $items = Item::WhereHas('purchase', function ($query) use ($user) {
+                $query->where(function ($q) use ($user) {
+                    $q->where('status', 'trading')
+                    ->orWhere(function ($q2) use ($user) {
+                        $q2->where('status', 'completed')
+                        ->whereDoesntHave('reviews', function ($qr) use ($user) {
+                            $qr->where('reviewer_id', $user->id);
+                        });
+                    });
+                });
             })
                 ->where(function ($q) use ($user) {
                     $q->where('user_id', $user->id)
@@ -91,7 +99,16 @@ class ProfileController extends Controller
                 $q2->where('user_id', $user->id);
             });
         })
-        ->where('status', 'trading')->count();
+        ->where(function ($q) use ($user) {
+            $q->where('status', 'trading')
+            ->orWhere(function ($q2) use ($user) {
+                $q2->where('status', 'completed')
+                ->whereDoesntHave('reviews', function ($qr) use ($user) {
+                    $qr->where('reviewer_id', $user->id);
+                });
+            });
+        })
+        ->count();
 
         return view('mypage.profile', compact('items', 'user', 'viewType', 'profile', 'reviewAvg', 'tradingCount'));
     }

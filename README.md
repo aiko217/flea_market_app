@@ -67,10 +67,35 @@ php artisan storage:link
   OK (1 test, 1 assertion)
    ```
 
+## メール認証
+
+mailhogというツールを使用しています。<br>
+以下のリンクから会員登録をしてください。　<br>
+http://localhost:8025/
+
+1. .envに以下の環境変数を追加
+``` text
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_FROM_ADDRESS=no-reply@example.com
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
 ## user のログイン用初期データ
 
-- メールアドレス: user@gmail.com
-- パスワード: user1234
+name: 出品者A 
+email: seller1@example.com 
+password: password  
+-------------------------
+name: 出品者B
+email: seller2@example.com
+password: password  
+-------------------------
+name: 未出品ユーザー
+email: nouser@example.com
+password: password
+-------------------------
 
 ## 使用技術(実行環境)
 - PHP8.1.33
@@ -83,4 +108,118 @@ php artisan storage:link
 
 ## ER 図
 
-![ER図](drawio.png)
+![ER図](er.png)
+
+### usersテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+	|id | bigint |	○	|	○	|
+	|name	| varchar(255)	|		| ○	|
+	|email | varchar(255) |		○	|
+	|Email Verification_at	| timestamp |				
+	|password |varchar(255)	|		○	|
+	|rememberToken	|varchar(100)	|			
+	|created_at	|timestamp |			
+	|updated_at	|timestamp |
+											
+### itemsテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+	|id | bigint |	○	|	○	|
+	|user_id	| bigint	| 	○	| users(id) |
+	|image | varchar(255) |	○	|
+	|name	| varchar(255)	| 	○	|
+	|brand |	varchar(255) |			
+	|description | varchar(255) |	○	|
+	|price |	int |	 ○	|
+	|condition_id	| bigint	|	○	| conditions_(id) |
+	|created_at	| timestamp	|	○	|
+	|updated_at	| timestamp	| 	○	|
+   						
+### purchasesテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+	|id |bigint	| ○ |	 ○	|
+	|item_id	| bigint	|	○	|tems(id) |
+	|buyer_id | bigint |	○	| users(id) |
+	|sending_postcode	| varchar(255)	|	○	|
+	|sending_address	| varchar(255)	| 	○	|
+	|sending_building	| varchar(255)	|			
+	|status	| varchar(255)	|			
+	|updated_at	| timestamp	|			
+	|created_at	| timestamp	|			
+	                 				
+### profilesテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+	|id | bigint	| ○	|	○	|
+	|user_id	| bigint	| 	○	|users(id) |
+	|image |	varchar(255) |			
+	|username | varchar(255) |	○	|
+	|postal_code |	string |	○	|
+	|address	| varchar(255)	|	○	|
+	|building | varchar(255) |			
+	|created_at	| timestamp	|			
+	|updated_at	| timestamp	|			
+													
+### favoritesテーブル
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+	|id | bigint |	○	|	○	|
+	|user_id	| bigint	| ○ | users(id) |
+	|item_id	| bigint	|	○	| item(id)|
+	|created_at	| timestamp	|			
+	|updated_at	| timestamp	|			
+					
+### categoriesテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+	|id |bigint	| ○ |	○	|
+	|category |	varchar(255) |	○	|
+	|created_at	| timestamp	|		
+	|updated_at	| timestamp	|
+							
+### category_item	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+	|id | bigint |	○	|	○	|
+	|item_id	| bigint	|	○	| users(id)|
+	|category_id | bigint |	○	| categories(id) |
+	|created_at	| timestamp	|			
+	|updated_at	| timestamp	|		
+																	
+### commentsテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+	|id	| bigint	| ○	|	○	|
+	|user_id	bigint |	○	| users(id) |
+	|item_id	bigint	|	○	|
+	|comment |	varchar(255) |	○	|
+	|created_at	| timestamp	|		
+	|updated_at	| timestamp	|		
+													
+### conditionsテーブル
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+	|id	| bigint |	○ |	○	|
+	|condition	| varchar(255)	|	○	|
+	|created_at	timestamp |			
+	|updated_at	timestamp |			
+																		
+### messagesテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+	|id | bigint |	○	|	○	|
+	|purchase_id |	bigint |			○	
+	|user_id	| bigint	|			
+	|body |	varchar(255)	|			
+	|image |	varchar(255)	|			
+	|is_read	| varchar(255)	|			
+	|created_at	| timestamp	|			
+	|updated_at	| timestamp	|			
+	   											
+### reviewsテーブル	
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+	|id |	bigint |	○	|	○	|
+	|reviewer_id	| bigint	|		○	|
+	|reviewed_user_id	| bigint	|		
+	|created_at	| timestamp	|			
+	|updated_at	| timestamp	|			
+	|rating	|varchar(255)	|			
+	|purchase_id |	bigint	|			
+						
+						
+						
+						
+						
+						

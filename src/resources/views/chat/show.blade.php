@@ -37,7 +37,10 @@
                 </div>
 
                 @if($isBuyer && $purchase->status === 'trading')
-                <button id="completeBtn" class="complete-btn">取引を完了する</button>
+                <form method="POST" action="{{ route('chat.complete', $purchase) }}">
+                    @csrf
+                    <button type="submit" class="complete-btn">取引を完了する</button>
+                </form>
                 @endif
             </div>
         </div>
@@ -154,11 +157,9 @@
     });
 </script>
 
-@if(
-$isBuyer && in_array($purchase->status, ['trading', 'completed']) && !$purchase->review
-)
+@if($showReviewModal && $purchase->status !== 'rated')
 
-<div id="reviewModal" class="modal hidden">
+<div id="reviewModal" class="modal show">
     <form method="POST" action="{{ route('review.store', $purchase) }}">
         @csrf
         <div class="container">
@@ -177,17 +178,4 @@ $isBuyer && in_array($purchase->status, ['trading', 'completed']) && !$purchase-
     </form>
 </div>
 @endif
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const btn = document.getElementById('completeBtn');
-        const modal = document.getElementById('reviewModal');
-
-        if (!btn || !modal) return;
-
-        btn.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-            modal.classList.add('show')
-        });
-    });
-</script>
 @endsection

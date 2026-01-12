@@ -7,6 +7,8 @@ use App\Models\Purchase;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ChatMessageRequest;
+use App\Mail\TradeCompletedMail;
+use Illuminate\Support\Facades\Mail;
 
 class ChatController extends Controller
 {
@@ -38,7 +40,7 @@ class ChatController extends Controller
             $sidebarPurchases = Purchase::whereHas('item', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
             })
-            ->where('status', 'trading')
+            ->whereIn('status', ['trading', 'completed'])
             ->with([
                 'item', 'messages' => function ($q) {
                     $q->where('is_read', false);
@@ -53,8 +55,16 @@ class ChatController extends Controller
         ? $purchase->item->user
         : $purchase->buyer;
 
+        $purchase->load(['item', 'reviews']);
 
-        return view('chat.show', compact('purchase', 'messages', 'isSeller', 'isBuyer', 'sidebarPurchases', 'partner'));
+        $showReviewModal = false;
+        if($isBuyer) {
+            $showReviewModal = session('showReviewModal', false);
+        } elseif ($isSeller) {
+            $showReviewModal = $purchase->status=== 'completed' && !$purchase->reviews->where('reviewer_id', $user->id)->first();
+        }
+
+        return view('chat.show', compact('purchase', 'messages', 'isSeller', 'isBuyer', 'sidebarPurchases', 'partner', 'showReviewModal'));
     }
 
     public function store(ChatMessageRequest $request, Purchase $purchase)
@@ -95,5 +105,23 @@ class ChatController extends Controller
         $message->delete();
 
         return back();
+    }
+
+    public function complete(Purchase $purchase)
+    {
+        if ($purchase->buyer_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $purchase->update([
+            'status' => 'completed',
+        ]);
+
+        Mail::to($purchase->item->user->email)
+            ->send(new TradeCompletedMail($purchase));
+
+        return redirect()
+            ->route('chat.show', $purchase)
+            ->with('showReviewModal', true);
     }
 }
