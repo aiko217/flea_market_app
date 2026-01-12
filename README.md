@@ -163,7 +163,8 @@ password: password
 	|updated_at	| timestamp	|			
 													
 ### favoritesテーブル
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |						
 	|id | bigint |	○	|	○	|
 	|user_id	| bigint	| ○ | users(id) |
 	|item_id	| bigint	|	○	| item(id)|
@@ -179,7 +180,8 @@ password: password
 	|updated_at	| timestamp	|
 							
 ### category_item	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |					
 	|id | bigint |	○	|	○	|
 	|item_id	| bigint	|	○	| users(id)|
 	|category_id | bigint |	○	| categories(id) |
