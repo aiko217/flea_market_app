@@ -111,7 +111,8 @@ password: password
 ![ER図](er.png)
 
 ### usersテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |				
 	|id | bigint |	○	|	○	|
 	|name	| varchar(255)	|		| ○	|
 	|email | varchar(255) |		○	|
@@ -122,7 +123,8 @@ password: password
 	|updated_at	|timestamp |
 											
 ### itemsテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |					
 	|id | bigint |	○	|	○	|
 	|user_id	| bigint	| 	○	| users(id) |
 	|image | varchar(255) |	○	|
@@ -135,7 +137,8 @@ password: password
 	|updated_at	| timestamp	| 	○	|
    						
 ### purchasesテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |					
 	|id |bigint	| ○ |	 ○	|
 	|item_id	| bigint	|	○	|tems(id) |
 	|buyer_id | bigint |	○	| users(id) |
@@ -147,7 +150,8 @@ password: password
 	|created_at	| timestamp	|			
 	                 				
 ### profilesテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |				
 	|id | bigint	| ○	|	○	|
 	|user_id	| bigint	| 	○	|users(id) |
 	|image |	varchar(255) |			
@@ -167,7 +171,8 @@ password: password
 	|updated_at	| timestamp	|			
 					
 ### categoriesテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |				
 	|id |bigint	| ○ |	○	|
 	|category |	varchar(255) |	○	|
 	|created_at	| timestamp	|		
@@ -182,7 +187,8 @@ password: password
 	|updated_at	| timestamp	|		
 																	
 ### commentsテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |				
 	|id	| bigint	| ○	|	○	|
 	|user_id	bigint |	○	| users(id) |
 	|item_id	bigint	|	○	|
@@ -191,14 +197,16 @@ password: password
 	|updated_at	| timestamp	|		
 													
 ### conditionsテーブル
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |						
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |					
 	|id	| bigint |	○ |	○	|
 	|condition	| varchar(255)	|	○	|
 	|created_at	timestamp |			
 	|updated_at	timestamp |			
 																		
 ### messagesテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |				
 	|id | bigint |	○	|	○	|
 	|purchase_id |	bigint |			○	
 	|user_id	| bigint	|			
@@ -209,7 +217,8 @@ password: password
 	|updated_at	| timestamp	|			
 	   											
 ### reviewsテーブル	
-   |カラム名 | 型 | primary key | unique key | not null | foreign key |					
+   |カラム名 | 型 | primary key | unique key | not null | foreign key |	
+   | --- | --- | --- | --- | --- | --- |				
 	|id |	bigint |	○	|	○	|
 	|reviewer_id	| bigint	|		○	|
 	|reviewed_user_id	| bigint	|		
