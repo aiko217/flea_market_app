@@ -30,4 +30,9 @@ class Purchase extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+    public function review() 
+    {
+        return $this->hasOne(Review::class);
+    }
 }

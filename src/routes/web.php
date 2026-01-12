@@ -6,6 +6,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 /*
@@ -55,6 +56,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/chat/{purchase}', [ChatController::class, 'store'])->name('chat.store');
     Route::put('/chat/message/{message}', [ChatController::class, 'update'])->name('chat.update');
     Route::delete('/chat/message/{message}', [ChatController::class, 'destroy'])->name('chat.destroy');
+    Route::post('/purchase/{purchase}/review', [ReviewController::class, 'store'])->name('review.store');
 
 });
 

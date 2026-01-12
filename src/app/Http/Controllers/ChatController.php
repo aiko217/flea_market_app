@@ -39,7 +39,13 @@ class ChatController extends Controller
                 $q->where('user_id', $user->id);
             })
             ->where('status', 'trading')
-            ->with('item')
+            ->with([
+                'item', 'messages' => function ($q) {
+                    $q->where('is_read', false);
+                }
+            ])
+            ->withMax('messages as latest_message_at', 'created_at')
+            ->orderByDesc('latest_message_at')
             ->get();
         }
 

@@ -14,7 +14,7 @@
             @foreach($sidebarPurchases as $sidePurchase)
             <li class="sidebar-item 
             {{ $sidePurchase->id === $purchase->id ? 'active' : ''}}">
-                <a href="{{ route('chat.show', $sidePurchase->id) }}">
+                <a href="{{ route('chat.show', $sidePurchase->id) }}" class="item-button">
                     {{ $sidePurchase->item->name }}
                 </a>
             </li>
@@ -31,13 +31,13 @@
                         @else
                             {{ asset('images/avatar-placeholder.png') }}
                              @endif"
-                              alt="avatar">
+                            alt="avatar">
                     </div>
                     <h1>「{{ $partner->name }}」さんとの取引画面</h1>
                 </div>
 
-                @if($isBuyer)
-                <button class="complete-btn">取引を完了する</button>
+                @if($isBuyer && $purchase->status === 'trading')
+                <button id="completeBtn" class="complete-btn">取引を完了する</button>
                 @endif
             </div>
         </div>
@@ -154,4 +154,40 @@
     });
 </script>
 
+@if(
+$isBuyer && in_array($purchase->status, ['trading', 'completed']) && !$purchase->review
+)
+
+<div id="reviewModal" class="modal hidden">
+    <form method="POST" action="{{ route('review.store', $purchase) }}">
+        @csrf
+        <div class="container">
+            <p class="complete">取引が完了しました。</p>
+            <p class="review">今回の取引相手はどうでしたか？</p>
+            <div class="star-rating">
+                @for($i=5; $i>=1; $i--)
+                <input type="radio" name="rating" id="star{{ $i }}" value="{{ $i}}">
+                <label for="star{{ $i }}">
+                    ★
+                </label>
+                @endfor
+            </div>
+            <button class="send" type="submit">送信する</button>
+        </div>
+    </form>
+</div>
+@endif
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('completeBtn');
+        const modal = document.getElementById('reviewModal');
+
+        if (!btn || !modal) return;
+
+        btn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            modal.classList.add('show')
+        });
+    });
+</script>
 @endsection

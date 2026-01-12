@@ -11,15 +11,17 @@
     <div class="profile__avatar">
       <img src="{{ $user->profile->image ? asset('storage/' . $user->profile->image) : asset('images/default-icon.png') }}" alt="">
     </div>
-    <div class="mypage-username">{{ $user->profile->username }}</div>
+    <div class="mypage-user">
+      <div class="mypage-username">{{ $user->profile->username }}</div>
 
-    @if(!is_null($reviewAvg))
-    <div class="user-rating">
-      @for($i = 1; $i <= 5; $i++)
-        <span class="star {{ $i <= $reviewAvg ? 'active' : '' }}">⭐︎</span>
-        @endfor
+      @if(!is_null($reviewAvg))
+      <div class="user-rating">
+        @for($i = 1; $i <= 5; $i++)
+          <span class="star {{ $i <= $reviewAvg ? 'active' : '' }}">★</span>
+          @endfor
+      </div>
+      @endif
     </div>
-    @endif
     <a href="/mypage/profile" class="submit-profile">プロフィールを編集</a>
   </div>
   <div class="toppage-list">
