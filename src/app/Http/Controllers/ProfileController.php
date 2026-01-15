@@ -47,7 +47,7 @@ class ProfileController extends Controller
         
         $viewType = $request->input('viewType', 'sell');
         $user = Auth::user();
-        $profile = $user->profile ?? null;
+        $profile = $user->profile ?? new Profile();
 
         $reviewAvg = null;
 

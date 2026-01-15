@@ -9,10 +9,10 @@
 <form class="form" action="/mypage" method="get">
   <div class="user-info">
     <div class="profile__avatar">
-      <img src="{{ $user->profile->image ? asset('storage/' . $user->profile->image) : asset('images/default-icon.png') }}" alt="">
+      <img src="{{ optional($user->profile)->image ? asset('storage/' . $user->profile->image) : asset('images/default-icon.png') }}" alt="">
     </div>
     <div class="mypage-user">
-      <div class="mypage-username">{{ $user->profile->username }}</div>
+      <div class="mypage-username">{{ optional($user->profile)->username ?? '未設定ユーザー' }}</div>
 
       @if(!is_null($reviewAvg))
       <div class="user-rating">
